@@ -31,4 +31,13 @@
         android:id="@+id/tibbr_reg_button"
         android:layout_width="200dp"
         android:layout_height="wrap_content"/>
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:text="getAuth_token"
+        android:id="@+id/auth_token"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"/>
+
+
 </LinearLayout>

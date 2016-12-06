@@ -100,6 +100,7 @@ public class FaceBookLoginUtil {
                 }
             });
         }
+
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -111,6 +112,7 @@ public class FaceBookLoginUtil {
     private class FaceBookCallBackListener implements FacebookCallback<LoginResult> {
         @Override
         public void onSuccess(LoginResult result) {
+
             fetchUserInfo(result.getAccessToken());
         }
         @Override

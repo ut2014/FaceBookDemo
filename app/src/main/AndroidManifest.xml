@@ -6,14 +6,34 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <uses-permission
+        android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission
+        android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+
+    <!-- client -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+
+    <!-- Authenticator -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+
+    <account-authenticator xmlns:android="http://schemas.android.com/apk/res/android"
+                           android:accountType="com.facebook.auth.login"
+        />
+
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
     <application
         android:name=".MApplication"
-        tools:replace="android:theme"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:theme">
         <activity android:name=".demo2.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -24,7 +44,6 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
-
 
         <activity
             android:name="com.facebook.CustomTabActivity"
@@ -45,10 +64,58 @@
             android:label="@string/app_name"
             />
 
+        <activity
+            android:name=".demo3.authenticator.AuthenticatorActivity"
+            android:excludeFromRecents="true"
+            android:label="@string/ui_activity_title"
+            android:theme="@android:style/Theme.Dialog"
+            >
+            <!--
+                No intent-filter here! This activity is only ever launched by
+                someone who explicitly knows the class name
+            -->
+        </activity>
+        <activity android:name=".auth2.AuthActivity"
+
+                  />
+        <activity android:name=".auth2.AuthActivity_1"
+
+                  />
+
         <provider
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider1790169751252953"
             android:exported="true"/>
+
+
+        <service
+            android:name=".demo3.authenticator.AuthenticationService"
+            android:exported="true">
+            <intent-filter>
+                <action
+                    android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator"
+                />
+        </service>
+        <!--<service
+            android:name=".demo3.syncadapter.SyncService"
+            android:exported="true">
+            <intent-filter>
+                <action
+                    android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+            <meta-data
+                android:name="android.provider.CONTACTS_STRUCTURE"
+                android:resource="@xml/contacts" />
+
+        </service>-->
+
     </application>
 
 </manifest>
